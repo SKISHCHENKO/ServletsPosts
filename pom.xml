@@ -29,13 +29,13 @@
             <version>2.11.0</version>
             <scope>compile</scope>
         </dependency>
-            <!-- https://mvnrepository.com/artifact/com.heroku/webapp-runner -->
-            <dependency>
-                <groupId>com.heroku</groupId>
-                <artifactId>webapp-runner</artifactId>
-                <version>10.1.28.0</version>
-                <scope>runtime</scope>
-            </dependency>
+        <!-- https://mvnrepository.com/artifact/com.heroku/webapp-runner -->
+        <dependency>
+            <groupId>com.heroku</groupId>
+            <artifactId>webapp-runner</artifactId>
+            <version>10.1.28.0</version>
+            <scope>runtime</scope>
+        </dependency>
 
     </dependencies>
 
