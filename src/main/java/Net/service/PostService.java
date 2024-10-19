@@ -28,11 +28,25 @@ public class PostService {
     // Сохраняет пост, если ID 0 - создает новый, иначе обновляет существующий
     // Если такого поста нет, выбрасывает исключение
     public Post save(Post post) {
-        Optional<Post> postcheck = repository.getById(post.getId());
-        if (postcheck.isEmpty()) {
-            throw new NotFoundException("Post with id " + post.getId() + " not found");
+        if (post.getId() == 0) {
+            // Создание нового поста
+            return repository.save(post);
+        } else {
+            // Обновление существующего поста
+            Optional<Post> existingPost = repository.getById(post.getId());
+
+            // Проверка, существует ли пост с таким ID
+            if (existingPost.isEmpty()) {
+                throw new NotFoundException("Post with id " + post.getId() + " not found");
+            }
+
+            // Проверка на потенциальный конфликт (например, если содержимое одинаково)
+            if (existingPost.get().getContent().equals(post.getContent())) {
+                throw new IllegalArgumentException("Conflict: Post with id " + post.getId() + " has the same content");
+            }
+
+            return repository.save(post); // Обновление поста
         }
-        return repository.save(post);
     }
 
     // Удаляет пост по ID, если пост не найден, выбрасывает исключение
