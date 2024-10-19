@@ -26,7 +26,7 @@ public class PostRepository {
     }
 
     // Сохранение поста
-    public synchronized Post save(Post post) {
+    public Post save(Post post) {
         if (post.getId() == 0) {
             long newId = idGenerator.incrementAndGet();
             post.setId(newId);
@@ -38,7 +38,7 @@ public class PostRepository {
     }
 
     // Удаление поста по ID
-    public synchronized void removeById(long id) {
+    public void removeById(long id) {
         posts.remove(id);
     }
 }

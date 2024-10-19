@@ -12,10 +12,10 @@ import java.io.IOException;
 
 public class MainServlet extends HttpServlet {
     private PostController controller;
-    private final String PATH = "/api/posts/";
-    private final String GET = "GET";
-    private final String POST = "POST";
-    private final String DELETE = "DELETE";
+    private static final String PATH = "/api/posts/";
+    private static final String GET = "GET";
+    private static final String POST = "POST";
+    private static final String DELETE = "DELETE";
 
     @Override
     public void init() {
