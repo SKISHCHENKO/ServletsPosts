@@ -38,9 +38,23 @@ the stack trace, and sets the response status to 500 Internal Server Error.
 - Specific conditions (like invalid IDs) return different HTTP status codes (e.g., 400 Bad Request for certain invalid inputs 
 and 404 Not Found for non-existing resources).
 
-## Dependency Injection via Annotation Config ##
+## Dependency Injection via JavaConfig Config ##
 
-final var context = new AnnotationConfigApplicationContext("Net");  
-controller = context.getBean("postController", PostController.class);  
+final var context = new AnnotationConfigApplicationContext(Net.Config.JavaConfig.class);
+controller = context.getBean(PostController.class);
 
-Using: @Controller @Service @Repository
+public class JavaConfig {
+    @Bean
+    public PostController postController(PostService service) {
+        return new PostController(service);
+    }
+    @Bean
+    public PostService postService(PostRepository repository) {
+        return new PostService(repository);
+    }
+    @Bean
+    public PostRepository postRepository() {
+        return new PostRepository();
+    }
+}
+  

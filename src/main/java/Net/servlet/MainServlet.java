@@ -18,8 +18,14 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() {
-        final var context = new AnnotationConfigApplicationContext("Net");
-        controller = context.getBean("postController", PostController.class);
+        try {
+            // Создаем контекст, используя конфигурационный класс JavaConfig
+            final var context = new AnnotationConfigApplicationContext(Net.Config.JavaConfig.class);
+            controller = context.getBean(PostController.class);  // Инициализация PostController
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Ошибка инициализации", e);
+        }
     }
 
     @Override
