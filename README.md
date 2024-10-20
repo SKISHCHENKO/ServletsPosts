@@ -37,3 +37,10 @@ Models: The data structures used to represent the application's entities (Post).
 the stack trace, and sets the response status to 500 Internal Server Error.
 - Specific conditions (like invalid IDs) return different HTTP status codes (e.g., 400 Bad Request for certain invalid inputs 
 and 404 Not Found for non-existing resources).
+
+## Dependency Injection via Annotation Config ##
+
+final var context = new AnnotationConfigApplicationContext("Net");  
+controller = context.getBean("postController", PostController.class);  
+
+Using: @Controller @Service @Repository
