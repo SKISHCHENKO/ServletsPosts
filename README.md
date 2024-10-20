@@ -40,21 +40,21 @@ and 404 Not Found for non-existing resources).
 
 ## Dependency Injection via JavaConfig Config ##
 
-final var context = new AnnotationConfigApplicationContext(Net.Config.JavaConfig.class);
-controller = context.getBean(PostController.class);
+final var context = new AnnotationConfigApplicationContext(Net.Config.JavaConfig.class); 
+controller = context.getBean(PostController.class);  
 
-public class JavaConfig {
-    @Bean
-    public PostController postController(PostService service) {
-        return new PostController(service);
-    }
-    @Bean
-    public PostService postService(PostRepository repository) {
-        return new PostService(repository);
-    }
-    @Bean
-    public PostRepository postRepository() {
-        return new PostRepository();
-    }
-}
+public class JavaConfig {  
+    @Bean  
+    public PostController postController(PostService service) {  
+        return new PostController(service);  
+    }  
+    @Bean  
+    public PostService postService(PostRepository repository) {  
+        return new PostService(repository);  
+    }  
+    @Bean  
+    public PostRepository postRepository() {  
+        return new PostRepository();  
+    }  
+}  
   
