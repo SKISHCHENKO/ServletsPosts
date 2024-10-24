@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -23,12 +24,9 @@ public class PostController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public void all(HttpServletResponse response) throws IOException {
+    public List<Post> all() {
         System.out.println("Printing all posts");
-        response.setContentType(APPLICATION_JSON);
-        final var data = service.all();
-        final var gson = new Gson();
-        response.getWriter().print(gson.toJson(data));
+        return service.all();
     }
 
     // Получение поста по ID
@@ -42,12 +40,8 @@ public class PostController {
     // Сохранение нового поста или обновление существующего
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType(APPLICATION_JSON);
-        final var gson = new Gson();
-        final var post = gson.fromJson(request.getReader(), Post.class);
-        final var data = service.save(post);
-        response.getWriter().print(gson.toJson(data));
+    public Post save(@RequestBody Post post) {
+        return service.save(post);
     }
 
     // Удаление поста по ID
