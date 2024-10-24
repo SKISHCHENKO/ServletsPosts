@@ -3,10 +3,12 @@ package Net.service;
 import Net.exception.NotFoundException;
 import Net.model.Post;
 import Net.repository.PostRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PostService {
     private final PostRepository repository;
 

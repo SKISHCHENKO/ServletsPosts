@@ -1,4 +1,5 @@
 ## The Java Servlet application. Servlet Architecture Overview ## 
+## Application switch to Sring MVC with annotaions ##
 
 
 ### Servlet Class (MainServlet) ###  
