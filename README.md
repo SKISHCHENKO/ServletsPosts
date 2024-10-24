@@ -50,7 +50,7 @@ public class JavaConfig {
     }  
     @Bean  
     public PostService postService(PostRepository repository) {  
-        return new PostService(repository);  
+       return new PostService(repository);  
     }  
     @Bean  
     public PostRepository postRepository() {  
