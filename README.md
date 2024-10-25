@@ -1,7 +1,6 @@
 ## The Java Servlet application. Servlet Architecture Overview ## 
 ## Application switch to Sring MVC with annotaions ##
 
-
 ### Servlet Class (MainServlet) ###  
 - The MainServlet class extends HttpServlet, serving as the main entry point for handling HTTP requests related to posts.
 - It initializes necessary components in the init() method, including the PostController, PostService, and PostRepository.
@@ -38,3 +37,12 @@ Models: The data structures used to represent the application's entities (Post).
 the stack trace, and sets the response status to 500 Internal Server Error.
 - Specific conditions (like invalid IDs) return different HTTP status codes (e.g., 400 Bad Request for certain invalid inputs 
 and 404 Not Found for non-existing resources).
+
+### 7. Post Deletion and PostService Update ### 
+- Soft Deletion: In the transition to Spring MVC, deletion of posts is managed through soft deletion. Posts are not removed from 
+the database but are instead marked as removed, allowing for retention and potential recovery of deleted data.  
+- PostService Update: The PostService class has been updated to support this approach. The removeById method now sets a removed flag
+ to true for the specified post ID instead of physically deleting the post from the repository. This update helps prevent the accidental
+  loss of data and allows administrators to filter posts based on their removal status.  
+- Filtering Deleted Posts: When fetching posts (e.g., in all() or getById() methods), PostService filters out posts with removed = true, 
+ensuring that only active posts are retrieved for display and interaction.  
