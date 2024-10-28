@@ -1,5 +1,5 @@
-# The Java Servlet application. Servlet Architecture Overview #
-## Application using Spring MVC with annotaions ##
+# The Java Servlet application. #
+## Application using Spring MVC with annotations ##
 
 ## 1. Application ##
 ### Model: ###
