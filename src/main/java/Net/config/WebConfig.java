@@ -10,18 +10,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import java.util.List;
 
 @Configuration
-public class WebConfig  implements WebMvcConfigurer {
-    @Bean
-    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
-        final var bean = new RequestMappingHandlerAdapter();
-        // MappingJackson2HttpMessageConverter
-        bean.getMessageConverters().add(new GsonHttpMessageConverter());
-        return bean;
-    }
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        // Очищаем список и добавляем только Gson-конвертер
-        converters.clear();
-        converters.add(new GsonHttpMessageConverter());
-    }
+public class WebConfig {
+    // Можно оставить пустым, Spring Boot сам добавит Jackson в качестве конвертера
 }

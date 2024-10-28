@@ -47,11 +47,9 @@ public class PostController {
     // Обработка исключения NotFoundException (404)
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Map<String, String>> handleNotFoundException(NotFoundException e) {
-        ResponseEntity<Map<String, String>> response = ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+    public @ResponseBody ResponseEntity<Map<String, String>> handleNotFoundException(NotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Map.of("error", "Post not found"));
-        return response;
     }
     // Обработка IllegalArgumentException (400 Bad Request)
     @ExceptionHandler(IllegalArgumentException.class)
