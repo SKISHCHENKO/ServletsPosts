@@ -13,14 +13,18 @@ public class Post {
 
   public Post(long id, String content) {
     this.id = id;
-    this.content = content;
+    this.setContent(content);  // Применение валидации
     this.removed = false;
   }
 
   public Post(long id, String content, boolean removed) {
     this.id = id;
-    this.content = content;
+    this.setContent(content);  // Применение валидации
     this.removed = removed;
+  }
+
+  public static Post createWithContent(String content) {
+    return new Post(0, content, false);
   }
 
   public long getId() {
@@ -36,6 +40,9 @@ public class Post {
   }
 
   public void setContent(String content) {
+    if (content == null || content.trim().isEmpty()) {
+      throw new IllegalArgumentException("Content cannot be null or empty");
+    }
     this.content = content;
   }
 
@@ -50,8 +57,9 @@ public class Post {
   /**
    * Помечает пост как удаленный.
    */
-  public void markAsRemoved() {
+  public Post markAsRemoved() {
     this.removed = true;
+    return this;
   }
 
   @Override

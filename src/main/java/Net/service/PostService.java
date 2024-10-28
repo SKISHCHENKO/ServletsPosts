@@ -22,7 +22,6 @@ public class PostService {
                 .filter(post -> !post.isRemoved())
                 .collect(Collectors.toList());
     }
-
     // Возвращает пост по ID или выбрасывает исключение, если пост не найден или удален.
     public Post getById(long id) {
         return repository.getById(id)
