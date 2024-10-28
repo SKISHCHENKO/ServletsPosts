@@ -3,39 +3,44 @@
 
 ## 1. Application ##
 ### Model: ###
-- The model is responsible for representing the application's data. The model is represented by the Post class, which includes fields such as id,  
- content, and removed. This class also encapsulates business logic, such as methods for marking a post as removed.  
+- The model is responsible for representing the application's data. The model is represented by the Post class,   
+which includes fields such as id, content, and removed. This class also encapsulates business logic, such as methods  
+for marking a post as removed.    
 - The model interacts with the database through the repository.  
 
 ### View: ###  
-- In application, the view is likely formed on the client side (e.g., frontend or mobile application) that interacts with API.  
-- When using Spring MVC, if HTML needs to be returned, templates like Thymeleaf can be used. However, application primarily creates a RESTful API   
-that returns JSON.  
+- In application, the view is likely formed on the client side (e.g., frontend or mobile application) that interacts   
+with API.   
+- When using Spring MVC, if HTML needs to be returned, templates like Thymeleaf can be used. However, 
+application primarily creates a RESTful API that returns JSON.    
 
 ### Controller:  ###
 
-- Controller (PostController) handle incoming HTTP requests. They accept data from the client, invoke corresponding services to process   
-the logic, and return the results.  
-- Controller handle exceptions, such as NotFoundException, to return appropriate HTTP responses.  
+- Controller (PostController) handle incoming HTTP requests. They accept data from the client, invoke 
+corresponding services to process the logic, and return the results.    
+- Controller handle exceptions, such as NotFoundException, to return appropriate HTTP responses.    
 
 ## 2. Service ##
 ### Services: ###
-- The service (PostService) contains the application's business logic. It processes requests from controllers, interacts with repositories   
-for data access, and can include additional checks and data processing.  
+- The service (PostService) contains the application's business logic. It processes requests from controllers,
+ interacts with repositories for data access, and can include additional checks and data processing.    
 - The service is responsible for managing the state of data and handling exceptions and business rules.  
 
 ## 3. Data Access ##
 ### Repositories: ###
-- The repository (PostRepository) is responsible for data access. In your case, it uses a ConcurrentHashMap to store posts in memory.  
+- The repository (PostRepository) is responsible for data access. In your case, it uses a ConcurrentHashMap to store
+posts in memory.    
 - Repository provides methods for retrieving, saving, and deleting model objects.  
 
 ## 4. Exception Handling and Error Management ##
 ### Exception Handling: ###
-- Controller uses the @ExceptionHandler annotation to manage such exceptions and return appropriate HTTP status and error messages.  
+- Controller uses the @ExceptionHandler annotation to manage such exceptions and return appropriate HTTP 
+status and error messages.  
 
 ## 5. Configuration ##
 ### Application Configuration: ###
-- The WebConfig class configures the application, including necessary converters like GsonHttpMessageConverter for converting objects to JSON.  
+- The WebConfig class configures the application, including necessary converters like GsonHttpMessageConverter 
+for converting objects to JSON.   
 - ApplicationInitializer initializes the application context and sets up the DispatcherServlet, which manages the processing of incoming requests.  
 
 ## 6. Thread Safety ##
@@ -60,14 +65,15 @@ for data access, and can include additional checks and data processing.
 
 ## Контроллер (PostController): ##
 
-- Контроллер (PostController) обрабатывает входящие HTTP-запросы, принимает данные от клиента, вызывает соответствующие сервисы для обработки логики  
-и возвращает результаты.  
+- Контроллер (PostController) обрабатывает входящие HTTP-запросы, принимает данные от клиента,  
+вызывает соответствующие сервисы для обработки логики и возвращает результаты.  
 - Контроллер обрабатывает исключения, например, NotFoundException, чтобы вернуть корректные HTTP-ответы.  
 
 ## 2. Serviсe ##
 ### Сервис (PostService): ###
-- Сервис (PostService) содержит бизнес-логику приложения. Он обрабатывает запросы от контроллера, взаимодействует с репозиторием для доступа к данным   
-и может включать дополнительные проверки и обработку данных.  
+- Сервис (PostService) содержит бизнес-логику приложения. Он обрабатывает запросы от контроллера,  
+взаимодействует с репозиторием для доступа к данным и может включать дополнительные проверки и обработку  
+ данных.  
 - Сервис отвечает за управление состоянием данных, а также за обработку исключений и бизнес-правил.  
 
 ## 3. Доступ к данным ##
