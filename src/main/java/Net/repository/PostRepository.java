@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -22,9 +21,9 @@ public class PostRepository {
     }
 
     // Получение поста по ID
-    public Optional<Post> getById(long id) {
+    public Post getById(long id) {
         // Возвращаем пост по ID, если он существует
-        return Optional.ofNullable(posts.get(id));
+        return posts.get(id);
     }
 
     // Сохранение поста
@@ -33,8 +32,10 @@ public class PostRepository {
             long newId = idGenerator.incrementAndGet();
             post.setId(newId);
             posts.put(newId, post);
+            System.out.println("Created new post with ID: " + newId);
         } else {
             posts.put(post.getId(), post);
+            System.out.println("Updated post with ID: " + post.getId());
         }
         return post;
     }
@@ -42,5 +43,6 @@ public class PostRepository {
     // Удаление поста по ID
     public void removeById(long id) {
         posts.remove(id);
+        System.out.println("Removed post with ID: " + id);
     }
 }

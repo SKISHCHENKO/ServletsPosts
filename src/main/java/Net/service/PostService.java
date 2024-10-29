@@ -6,6 +6,7 @@ import Net.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,9 +25,18 @@ public class PostService {
     }
     // Возвращает пост по ID или выбрасывает исключение, если пост не найден или удален.
     public Post getById(long id) {
-        return repository.getById(id)
-                .filter(post -> !post.isRemoved())
-                .orElseThrow(() -> new NotFoundException("Post with id " + id + " not found or has been removed"));
+        Post post = repository.getById(id);
+        if (post == null) {
+            // Пост не найден
+            System.out.println("NotFoundException is being thrown for ID: " + id);
+            throw new NotFoundException("Post with id " + id + " not found");
+        }
+        if (post.isRemoved()) {
+            // Пост найден, но помечен как удаленный
+            System.out.println("NotFoundException is being thrown for ID: " + id);
+            throw new NotFoundException("Post with id " + id + " has been removed");
+        }
+        return post; // Возвращаем пост, если он существует и не удален
     }
 
     // Сохраняет пост, если ID 0 - создает новый, иначе обновляет существующий
@@ -37,23 +47,31 @@ public class PostService {
         if (postId == 0) {
             return repository.save(post);
         }
-        // Обновление существующего поста
-        Post existingPost = repository.getById(postId)
-                .filter(p -> !p.isRemoved())
-                .orElseThrow(() -> new NotFoundException("Post with id " + postId + " not found or has been removed"));
 
+        // Обновление существующего поста
+        Post existingPost = repository.getById(postId);
+        if (existingPost == null) {
+            throw new NotFoundException("Post with id " + postId + " not found");
+        }
+        if (existingPost.isRemoved()) {
+            throw new NotFoundException("Post with id " + postId + " has been removed");
+        }
         // Проверка на потенциальный конфликт (например, если содержимое одинаково)
         if (existingPost.getContent().equals(post.getContent())) {
             throw new IllegalArgumentException("Conflict: Post with id " + postId + " has the same content");
         }
-
         return repository.save(post); // Обновление поста
     }
 
     // Мягко удаляет пост по ID, помечая его как удаленный. Если пост не найден, выбрасывает исключение.
     public void removeById(long id) {
-        Post post = repository.getById(id)
-                .orElseThrow(() -> new NotFoundException("Post with id " + id + " not found"));
+        Post post = repository.getById(id);
+        if (post == null) {
+            throw new NotFoundException("Post with id " + id + " not found");
+        }
+        if (post.isRemoved()) {
+            throw new NotFoundException("Post with id " + id + " has been removed");
+        }
         post.markAsRemoved(); // Помечаем пост как удаленный
         repository.save(post); // Сохраняем изменения
     }
