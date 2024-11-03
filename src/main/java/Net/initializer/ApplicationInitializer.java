@@ -13,7 +13,6 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         final var context = new AnnotationConfigWebApplicationContext();
         context.register(WebConfig.class);
         context.scan("Net");
-       // context.refresh();
 
         // Создаем DispatcherServlet с контекстом
         final var servlet = new DispatcherServlet(context);
